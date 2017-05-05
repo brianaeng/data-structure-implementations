@@ -1,0 +1,1 @@
+// Implement Front for a Queue using only Dequeue, Enqueue(e) & Empty. (Note: This is an example of extending functionality without knowing the implementation details of how the Queue is implemented i.e. not knowing whether the Queue is implemented using an array or a linked list) Assume the data contained is int. Feel free to use additional data structures.
