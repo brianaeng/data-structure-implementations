@@ -11,7 +11,6 @@
 // Remove entries from an array with specified data value e.g. int value of 5 The array is of size 20 and all unassigned entries have value INT_MAX, which is specially reserved for this purpose. All unassigned entries are at (or shifted to be at) the end of the array.
 // Print the largest integer data value in a singly linked list
 // Print the largest integer data value in a native int array
-// Print all integer data values in a singly linked list
 // Print all integer data values in a native int array
 // Reverse a singly linked list. (Test: if reference to the first node is recorded before the function call, it should be pointing at the last node in the singly linked list after the function call is complete.)
 // Append a node to the beginning of a singly linked list
@@ -36,7 +35,7 @@ type LinkedList struct {
 }
 
 type Node struct {
-  value string
+  value int
   next *Node
 }
 
@@ -45,8 +44,8 @@ func (list *LinkedList) FindLength() int {
   return list.size
 }
 
-//Add a new Node to a LinkedList
-func (list *LinkedList) InsertNode(value string) *LinkedList {
+//Add a new Node to the end of a LinkedList
+func (list *LinkedList) InsertNode(value int) *LinkedList {
   currentNode := list.head
 
   for currentNode.next != nil {
@@ -63,7 +62,7 @@ func (list *LinkedList) InsertNode(value string) *LinkedList {
 }
 
 //Remove a Node
-func (list *LinkedList) RemoveNode(value string) *LinkedList {
+func (list *LinkedList) RemoveNode(value int) *LinkedList {
   currentNode := list.head
   var previousNode *Node
 
@@ -97,14 +96,26 @@ func (list *LinkedList) RemoveNode(value string) *LinkedList {
   return list
 }
 
+// Print all integer data values in a singly linked list
+func (list *LinkedList) PrintValues() *LinkedList {
+  currentNode := list.head
+
+  for currentNode != nil {
+    fmt.Printf(currentNode.value)
+    currentNode = currentNode.next
+  }
+
+  return list
+}
+
+
 func main() {
-  secondNode := Node{value:"test2", next:nil}
-  firstNode := Node{value:"test", next:&secondNode}
+  secondNode := Node{value:1, next:nil}
+  firstNode := Node{value:2, next:&secondNode}
   myList := LinkedList{head:&firstNode, size:1}
 
   myList.FindLength()
 
-  myList.InsertNode("testing3")
-  myList.RemoveNode("test2")
-  return
+  // myList.InsertNode("testing3")
+  // myList.RemoveNode("test2")
 }
