@@ -1,6 +1,3 @@
-// Implement Top for a Stack using only Push(e) and Pop. (Note: This is an example of extending functionality without knowing the implementation details of how the Stack is implemented i.e. not knowing whether the Stack is implemented using an array or a linked list). Assume the data contained is int.
-// Top() which returns the item that would be popped next  (for Stack)
-
 package main 
 
 import (
@@ -17,6 +14,7 @@ type Stack struct {
 	size int
 }
 
+// Top() which returns the item that would be popped next  (for Stack)
 func (stack *Stack) Top() string {
 	// return stack.x[0]
 

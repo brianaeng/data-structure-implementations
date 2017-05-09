@@ -4,3 +4,7 @@
 // How would you implement a Stack using 2 Queues?
 
 package main
+
+func main() {
+	
+}
