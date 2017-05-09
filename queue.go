@@ -33,6 +33,13 @@ func (queue *Queue) Enqueue(value int) *Queue {
 	queue.x[tail + 1] = value
 	tail++
 	size++
+
+	return queue
+}
+
+// Thinking I should have a method that checks if a resize is needed & resizes as needed
+func (queue *Queue) ResizeCheck() *Queue {
+	return queue
 }
 
 // Empty() which returns true is the data structure is empty, false otherwise
@@ -82,3 +89,4 @@ func (queue *Queue) Max() int {
 
 	return maxNum
 }
+
