@@ -1,13 +1,10 @@
-// Implement Front for a Queue using only Dequeue, Enqueue(e) & Empty. (Note: This is an example of extending functionality without knowing the implementation details of how the Queue is implemented i.e. not knowing whether the Queue is implemented using an array or a linked list) Assume the data contained is int. Feel free to use additional data structures.
-// Empty() which returns true is the data structure is empty, false otherwise
-// Min() which returns the minimum integer data value in the data structure
-// Max() which returns the maximum integer data value in the data structure
-
 package main
 
+// Downside of using an array as underlying data strucutre: resizing array would mean making a new one and moving everything over
+// Try implementing with a linked list too
 type Queue struct {
-	head int
-	tail int
+	head int //index of first value
+	tail int // index of last value
 	x []int
 	size int
 }
@@ -33,9 +30,55 @@ func (queue *Queue) Dequeue() *Queue {
 
 func (queue *Queue) Enqueue(value int) *Queue {
 	//Remember to change size of array if we add something that pushes size over
+	queue.x[tail + 1] = value
+	tail++
+	size++
 }
 
+// Empty() which returns true is the data structure is empty, false otherwise
 func (queue *Queue) Empty() bool {
+	if size == 0 {
+		return true
+	}
+	return false
 
+	//Or?
+	// for i := 0; i < len(q.x); i++ {
+	// 	if x[i] != nil {
+	// 		return false
+	// 	}
+	// return true
+	}
 }
 
+// Min() which returns the minimum integer data value in the data structure
+func (queue *Queue) Min() int {
+	if queue.Empty() {
+		return 0
+	}
+
+	minNum := queue.x[head]
+	for i := head; i < (queue.size - 1); i++ {
+		if queue[i] < minNum {
+			minNum = queue[i]
+		}
+	}
+
+	return minNum
+}
+
+// Max() which returns the maximum integer data value in the data structure
+func (queue *Queue) Max() int {
+	if queue.Empty() {
+		return 0
+	}
+
+	maxNum := queue.x[head]
+	for i := head; i < (queue.size - 1); i++ {
+		if queue[i] > maxNum {
+			maxNum = queue[i]
+		}
+	}
+
+	return maxNum
+}
