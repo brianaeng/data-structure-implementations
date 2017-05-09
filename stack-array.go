@@ -18,9 +18,12 @@ type Stack struct {
 }
 
 func (stack *Stack) Top() string {
-	return stack.x[0]
+	// return stack.x[0]
 
 	//way of doing this with only pop & push:
+	storedValue := stack.Pop()
+	stack.Push(storedValue)
+	return storedValue
 }
 
 func (stack *Stack) Push(value string) *Stack {

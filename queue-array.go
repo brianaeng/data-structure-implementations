@@ -16,18 +16,23 @@ func (queue *Queue) Size() int {
 
 // Front() which returns the item that would be dequeued next (for Queue) 
 func (queue *Queue) Front() int {
-	return queue.x[head]
+	// return queue.x[head]
 
 	//way of doing this with only queue & dequeue:
+	storedValue := queue.Dequeue()
+	queue.Enqueue(storedValue)
+
+	return storedValue
 }
 
-func (queue *Queue) Dequeue() *Queue {
+func (queue *Queue) Dequeue() int {
+	value := queue.x[head]
 	queue.x[head] = nil
 
 	head++
 	size--
 
-	return queue
+	return value
 } 
 
 func (queue *Queue) Enqueue(value int) *Queue {
