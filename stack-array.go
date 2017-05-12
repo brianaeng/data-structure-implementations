@@ -4,11 +4,6 @@ import (
 	"fmt"
 )
 
-// type Stack struct {
-// 	x []int
-// 	size int
-// }
-
 type Stack struct {
 	x []string
 	size int
