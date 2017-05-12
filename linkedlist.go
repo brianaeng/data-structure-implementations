@@ -1,4 +1,3 @@
-// Check if a singly linked list has a cycle. Return true if it has a cycle, false if it doesn't.
 // Find the middle node in a singly linked list. Return a pointer or reference to it.
 // Find the nth node from the end of a singly linked list, assuming index starting at 0. Return a pointer or reference to it.
 // Insert a node into a singly linked list sorted in ascending order of data
@@ -125,6 +124,23 @@ func (list *LinkedList) Reverse() *LinkedList {
   list.head = previousNode
 
   return list
+}
+
+// Check if a singly linked list has a cycle. Return true if it has a cycle, false if it doesn't.
+func (list *LinkedList) CycleCheck() bool {
+  slow := list.head
+  fast := slow.next
+
+  for {
+    if fast == nil || slow == nil {
+      return false
+    } else if fast == slow {
+      return true
+    } else {
+      slow = slow.next
+      fast = fast.next.next
+    }
+  }
 }
 
 
