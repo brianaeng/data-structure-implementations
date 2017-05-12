@@ -12,7 +12,6 @@
 // Print the largest integer data value in a singly linked list
 // Print the largest integer data value in a native int array
 // Print all integer data values in a native int array
-// Reverse a singly linked list. (Test: if reference to the first node is recorded before the function call, it should be pointing at the last node in the singly linked list after the function call is complete.)
 // Append a node to the beginning of a singly linked list
 // Check if the singly linked list contains a given integer value.
 // Check if a native integer array contains a given integer value.
@@ -101,20 +100,43 @@ func (list *LinkedList) PrintValues() *LinkedList {
   currentNode := list.head
 
   for currentNode != nil {
-    fmt.Printf(currentNode.value)
+    fmt.Println(currentNode.value)
     currentNode = currentNode.next
   }
 
   return list
 }
 
+// Reverse a singly linked list. (Test: if reference to the first node is recorded before the function call, it should be pointing at the last node in the singly linked list after the function call is complete.)
+func (list *LinkedList) Reverse() *LinkedList {
+  currentNode := list.head
+  var nextNode *Node
+  var previousNode *Node
+
+  for currentNode != nil {
+    nextNode = currentNode.next
+
+    //referencing pointers like this means I can read values & change them?
+    currentNode.next = previousNode 
+    previousNode = currentNode
+    currentNode = nextNode
+  }
+
+  list.head = previousNode
+
+  return list
+}
+
 
 func main() {
-  secondNode := Node{value:1, next:nil}
-  firstNode := Node{value:2, next:&secondNode}
+  thirdNode := Node{value:3, next: nil}
+  secondNode := Node{value:2, next:&thirdNode}
+  firstNode := Node{value:1, next:&secondNode}
   myList := LinkedList{head:&firstNode, size:1}
 
   myList.FindLength()
+  myList.Reverse()
+
 
   // myList.InsertNode("testing3")
   // myList.RemoveNode("test2")
