@@ -1,4 +1,3 @@
-// Find the middle node in a singly linked list. Return a pointer or reference to it.
 // Find the nth node from the end of a singly linked list, assuming index starting at 0. Return a pointer or reference to it.
 // Insert a node into a singly linked list sorted in ascending order of data
 // Remove the first 5 nodes from a singly linked list
@@ -20,6 +19,7 @@
 // Implement a function to remove a Node from the beginning of a doubly linked list.
 // Implement a function to add a Node at the second position in a doubly linked list.
 // Implement a function to remove the second Node from a doubly linked list.
+// doubly linked list 
 
 package main 
 
@@ -63,12 +63,6 @@ func (list *LinkedList) InsertNode(value int) *LinkedList {
 func (list *LinkedList) RemoveNode(value int) *LinkedList {
   currentNode := list.head
   var previousNode *Node
-
-  //Why doesn't this work??
-  // for currentNode.next.value != value {
-  //   previousNode = currentNode
-  //   currentNode = currentNode.next
-  // }
 
   for i := 0; i < list.FindLength(); i++ {
     fmt.Println(currentNode.value)
@@ -129,30 +123,54 @@ func (list *LinkedList) Reverse() *LinkedList {
 // Check if a singly linked list has a cycle. Return true if it has a cycle, false if it doesn't.
 func (list *LinkedList) CycleCheck() bool {
   slow := list.head
-  fast := slow.next
+  fast := list.head
 
-  for {
-    if fast == nil || slow == nil {
-      return false
-    } else if fast == slow {
+  for slow != nil && fast != nil && fast.next != nil {
+    slow = slow.next
+    fast = fast.next.next
+
+    if fast == slow {
+      fmt.Println(true)
       return true
-    } else {
-      slow = slow.next
-      fast = fast.next.next
     }
   }
+  fmt.Println(false)
+  return false
 }
 
+// Find the middle node in a singly linked list. Return a pointer or reference to it.
+func (list *LinkedList) FindMiddle() *Node {
+  length := list.FindLength()
+  desiredNode := length/2
+  currentNode := list.head
+
+  for i := 0; i < desiredNode; i++ {
+    currentNode = currentNode.next
+  }
+
+  fmt.Println(currentNode.value)
+  return currentNode
+}
 
 func main() {
-  thirdNode := Node{value:3, next: nil}
+  fifthNode := Node{value: 5, next: nil}
+  fourthNode := Node{value:4, next: &fifthNode}
+  thirdNode := Node{value:3, next: &fourthNode}
   secondNode := Node{value:2, next:&thirdNode}
-  firstNode := Node{value:1, next:&secondNode}
-  myList := LinkedList{head:&firstNode, size:1}
+  firstNode := Node{value:1, next: &secondNode}
+  myList := LinkedList{head:&firstNode, size:5}
 
   myList.FindLength()
-  myList.Reverse()
 
+  // Testing FindMiddle()
+  // myList.FindMiddle()
+
+  // Testing Reverse()
+  // myList.Reverse()
+
+  // Testing CycleCheck()
+  // fourthNode.next = &secondNode
+  // myList.CycleCheck()
 
   // myList.InsertNode("testing3")
   // myList.RemoveNode("test2")

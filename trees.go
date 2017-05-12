@@ -16,3 +16,6 @@ type Node struct {
 	right *Node
 }
 
+func (tree *Tree) Delete(value int) *Tree {
+	
+}
