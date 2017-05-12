@@ -3,3 +3,16 @@
 // Find the height of Binary Tree. Implement the recursive solution.
 // Insert a given value in a Binary Search Tree. Implement recursive solution.
 // Find a given value in a Binary Search Tree. Implement recursive solution. 
+
+package main
+
+type Tree struct {
+	root *Node
+}
+
+type Node struct {
+	value int
+	left *Node
+	right *Node
+}
+
