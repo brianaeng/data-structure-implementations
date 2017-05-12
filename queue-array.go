@@ -1,6 +1,8 @@
 package main
 
 // Downside of using an array as underlying data strucutre: resizing array would mean making a new one and moving everything over
+// How do I resize arrays? Do I keep doubling the size?
+
 // Try implementing with a linked list too
 type Queue struct {
 	head int //index of first value
