@@ -19,7 +19,6 @@
 // Implement a function to remove a Node from the beginning of a doubly linked list.
 // Implement a function to add a Node at the second position in a doubly linked list.
 // Implement a function to remove the second Node from a doubly linked list.
-// doubly linked list 
 
 package main 
 
