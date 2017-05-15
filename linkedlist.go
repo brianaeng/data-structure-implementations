@@ -55,7 +55,7 @@ func (list *LinkedList) InsertNode(value int) *LinkedList {
   currentNode.next = &newNode
   list.size++
 
-  //fmt.Printf(currentNode.next.value)
+  list.PrintValues()
   return list
 }
 
@@ -65,7 +65,6 @@ func (list *LinkedList) RemoveNode(value int) *LinkedList {
   var previousNode *Node
 
   for i := 0; i < list.FindLength(); i++ {
-    fmt.Println(currentNode.value)
     if currentNode.value == value {
       fmt.Println("Broke")
       break
@@ -82,8 +81,7 @@ func (list *LinkedList) RemoveNode(value int) *LinkedList {
   previousNode.next = currentNode.next
   list.size -= 1
 
-  // fmt.Println(previousNode.value)
-  // fmt.Printf(previousNode.next.value)
+  list.PrintValues()
 
   return list
 }
@@ -172,6 +170,6 @@ func main() {
   // fourthNode.next = &secondNode
   // myList.CycleCheck()
 
-  // myList.InsertNode("testing3")
-  // myList.RemoveNode("test2")
+  // myList.InsertNode(6)
+  // myList.RemoveNode(4)
 }
