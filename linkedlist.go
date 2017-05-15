@@ -107,7 +107,6 @@ func (list *LinkedList) Reverse() *LinkedList {
   for currentNode != nil {
     nextNode = currentNode.next
 
-    //referencing pointers like this means I can read values & change them?
     currentNode.next = previousNode 
     previousNode = currentNode
     currentNode = nextNode
