@@ -4,6 +4,12 @@ import (
 	"fmt"
 )
 
+//linked list versions
+//circular queues
+//cs library for linked list
+
+//optional reading - intro to pointers
+
 type Stack struct {
 	x []string
 	size int
