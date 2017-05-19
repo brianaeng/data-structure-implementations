@@ -48,10 +48,6 @@ func (tree *Tree) Preorder(node *Node) {
 	tree.Preorder(node.right)
 }
 
-func (tree *Tree) IterativePreorder(node *Node) {
-	
-}
-
 // Print all values in a Binary Tree using Post-order traversal - left, right, root
 func (tree *Tree) Postorder(node *Node) {
 	if node == nil {
@@ -63,10 +59,6 @@ func (tree *Tree) Postorder(node *Node) {
 	tree.Postorder(node.right)
 
 	fmt.Println(node.value)
-}
-
-func (tree *Tree) IterativePostorder(node *Node) {
-	
 }
 
 // Print all values in a Binary Tree using In-order traversal - left, root, right
@@ -82,14 +74,20 @@ func (tree *Tree) Inorder(node *Node) {
 	tree.Inorder(node.right)
 }
 
+//Stuck on these ones, so giving myself an internet hint: use a stack?
+func (tree *Tree) IterativePreorder(node *Node) {
+	
+}
+
+func (tree *Tree) IterativePostorder(node *Node) {
+	
+}
+
 func (tree *Tree) IterativeInorder(node *Node) {
 	
 }
 
-func (tree *Tree) DepthFirst(node *Node) {
-
-}
-
+//Stuck on this, so giving myself an internet hint: use a queue?
 func (tree *Tree) BreadthFirst(node *Node) {
 
 }

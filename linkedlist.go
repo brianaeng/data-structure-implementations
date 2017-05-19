@@ -42,10 +42,14 @@ func (list *LinkedList) FindLength() int {
 }
 
 //Add a new Node to the end of a LinkedList
+// Shruti: This function is useful for when it is a requirement to add sequentially/ at the end
+// Shruti: Add two more functions: (1) that adds node to the beginning (which is more efficient) and (2) which assumes the list maintains nodes in ascending values.
 func (list *LinkedList) InsertNode(value int) *LinkedList {
   currentNode := list.head
 
   for currentNode.next != nil {
+  // Shruti: What happens when this function is called and the linked list is empty i.e. list.head is nil?
+  // Shruti: The for condition will need to a null dereference error
     currentNode = currentNode.next
   }
 
@@ -63,7 +67,7 @@ func (list *LinkedList) RemoveNode(value int) *LinkedList {
   currentNode := list.head
   var previousNode *Node
 
-  for i := 0; i < list.FindLength(); i++ {
+  for i := 0; (i < list.FindLength() +1); i++ {
     if currentNode.value == value {
       fmt.Println("Broke")
       break
@@ -72,12 +76,14 @@ func (list *LinkedList) RemoveNode(value int) *LinkedList {
     currentNode = currentNode.next
   }
 
-  if currentNode.next == nil {
+  if currentNode == nil { 
+  // Shruti: If currentNode.next is nil, it doesn't necessarily mean that you didn't find the value.
+  // Shruti: What if the last node in the linked list had the value you were looking for?
     fmt.Println("No node with passed value")
     return list
   }
 
-  previousNode.next = currentNode.next
+  previousNode.next = currentNode.next // Shruti: previousNode is not set if the value you are looking for was in the first node. Update the code to handle that.
   list.size -= 1
 
   list.PrintValues()
@@ -117,11 +123,13 @@ func (list *LinkedList) Reverse() *LinkedList {
 }
 
 // Check if a singly linked list has a cycle. Return true if it has a cycle, false if it doesn't.
+// Shruti: It would be a useful exercise to call out the time and space complexity of each funciton in the file.
 func (list *LinkedList) CycleCheck() bool {
   slow := list.head
   fast := list.head
 
   for slow != nil && fast != nil && fast.next != nil {
+  // Shruti: As an optimization, it should be sufficient for the condition to be "fast != nil && fast.next != nil"
     slow = slow.next
     fast = fast.next.next
 
@@ -135,6 +143,7 @@ func (list *LinkedList) CycleCheck() bool {
 }
 
 // Find the middle node in a singly linked list. Return a pointer or reference to it.
+// Shruti: This solution definitely works. How would you solve this without looping through the list twice (avoid the first pass to get the length)?
 func (list *LinkedList) FindMiddle() *Node {
   length := list.FindLength()
   desiredNode := length/2
@@ -149,6 +158,7 @@ func (list *LinkedList) FindMiddle() *Node {
 }
 
 func main() {
+  // Shruti: Instead of manually curating the list, try using the functions you authored e.g. InsertNode. It will help you test them thoroughly as well.
   fifthNode := Node{value: 5, next: nil}
   fourthNode := Node{value:4, next: &fifthNode}
   thirdNode := Node{value:3, next: &fourthNode}
