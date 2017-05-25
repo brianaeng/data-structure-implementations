@@ -74,7 +74,7 @@ func (tree *Tree) Inorder(node *Node) {
 	tree.Inorder(node.right)
 }
 
-//Stuck on these ones, so giving myself an internet hint: use a stack?
+//Iterative versions
 func (tree *Tree) IterativePreorder(node *Node) {
 	
 }
@@ -87,9 +87,68 @@ func (tree *Tree) IterativeInorder(node *Node) {
 	
 }
 
-//Stuck on this, so giving myself an internet hint: use a queue?
+// Breadth first traversal
 func (tree *Tree) BreadthFirst(node *Node) {
+	currentNode := tree.root
+	finalqQueue := []int
 
+	finalQueue = append(finalQueue, currentNode)
+
+	for len(finalQueue) > 0 {
+		if currentNode.left != nil {
+			finalQueue = append(finalQueue, currentNode.left)
+		}
+
+		if currentNode.right != nil {
+			finalQueue = append(finalQueue, currentNode.right)
+		}
+	}	
+
+// Find the height of a tree (recursion)
+func (tree *Tree) FindHeight(node *Node) int {
+	if node == nil {
+		return 0
+	} else {
+		leftDepth := FindHeight(node.left)
+		rightDepth := FindHeight(node.right)
+
+		if leftDepth > rightDepth {
+			return leftDepth + 1
+		} else {
+			return rightDepth + 1
+		}
+	}
+}
+
+// Find the height of a tree (iterative) -- no idea if this works
+func (tree *Tree) FindHeightIterative(node *Node) int {
+	queue := []Node
+	var currentNode *Node
+
+	queue = append(queue, node)
+	height := 0
+
+	for {
+		if len(queue) < 1 {
+			return height
+		}
+
+		for i := 0; i < len(queue); i++ {
+			newQueue := []*Node
+			currentNode = queue[i]
+
+			if currentNode.left != nil {
+				newQueue = append(NewQueue, currentNode.left)
+			}
+
+			if currentNode.right != nil {
+				newQueue = append(NewQueue, currentNode.right)
+			}
+
+		}
+
+		queue = newQueue
+	}
 }
 
 // Delete a given value from a Binary Search Tree using recursive solution.
