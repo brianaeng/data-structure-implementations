@@ -62,6 +62,34 @@ func (list *LinkedList) InsertNode(value int) *LinkedList {
   return list
 }
 
+//Add a new Node to the beginning
+func (list *LinkedList) InsertNodeBeginning(value int) *LinkedList {
+  firstNode := list.head
+  newNode := Node{value: value, next: firstNode}
+  list.head = newNode
+
+  return list
+}
+
+//Add a new Node and keep the list in ascending order 1 4 5 7 
+func (list *LinkedList) InsertNodeAscending(value int) *LinkedList {
+  if value < list.head.value {
+    list.InsertNodeBeginning(value)
+  }
+
+  currentNode := list.head
+  var previousNode *Node
+
+  for currentNode != nil {
+    if value >= currentNode.value {
+       
+    }
+    currentNode = currentNode.next
+  }
+
+  return list
+}
+
 //Remove a Node
 func (list *LinkedList) RemoveNode(value int) *LinkedList {
   currentNode := list.head
@@ -70,6 +98,7 @@ func (list *LinkedList) RemoveNode(value int) *LinkedList {
   for i := 0; (i < list.FindLength() +1); i++ {
     if currentNode.value == value {
       fmt.Println("Broke")
+      previousNode = currentNode
       break
     }
     previousNode = currentNode
@@ -77,13 +106,13 @@ func (list *LinkedList) RemoveNode(value int) *LinkedList {
   }
 
   if currentNode == nil { 
-  // Shruti: If currentNode.next is nil, it doesn't necessarily mean that you didn't find the value.
-  // Shruti: What if the last node in the linked list had the value you were looking for?
+  // Shruti: If currentNode.next is nil, it doesn't necessarily mean that you didn't find the value. -- swapped currentNode.next to currentNode and made the loop go one longer (need to test if this is needed)
+  // Shruti: What if the last node in the linked list had the value you were looking for? -- using currentNode == nil means I'm checking beyond the last node
     fmt.Println("No node with passed value")
     return list
   }
 
-  previousNode.next = currentNode.next // Shruti: previousNode is not set if the value you are looking for was in the first node. Update the code to handle that.
+  previousNode.next = currentNode.next // Shruti: previousNode is not set if the value you are looking for was in the first node. Update the code to handle that. -- set previousNode in the if conditional
   list.size -= 1
 
   list.PrintValues()
@@ -128,8 +157,8 @@ func (list *LinkedList) CycleCheck() bool {
   slow := list.head
   fast := list.head
 
-  for slow != nil && fast != nil && fast.next != nil {
-  // Shruti: As an optimization, it should be sufficient for the condition to be "fast != nil && fast.next != nil"
+  for fast != nil && fast.next != nil {
+  // Shruti: As an optimization, it should be sufficient for the condition to be "fast != nil && fast.next != nil" -- updated!
     slow = slow.next
     fast = fast.next.next
 
@@ -143,7 +172,7 @@ func (list *LinkedList) CycleCheck() bool {
 }
 
 // Find the middle node in a singly linked list. Return a pointer or reference to it.
-// Shruti: This solution definitely works. How would you solve this without looping through the list twice (avoid the first pass to get the length)?
+// Shruti: This solution definitely works. How would you solve this without looping through the list twice (avoid the first pass to get the length)? -- I use the size attribute so I'm not looping twice, is there a way to do it only looping once without the size?
 func (list *LinkedList) FindMiddle() *Node {
   length := list.FindLength()
   desiredNode := length/2
@@ -157,14 +186,32 @@ func (list *LinkedList) FindMiddle() *Node {
   return currentNode
 }
 
+// Use the cycle trick where you have a fast and a slow counter
+func (list *LinkedList) FindMiddleAgain() *Node {
+  slowNode := list.head
+  fastNode := list.head
+
+  for fastNode != nil {
+    slowNode = slowNode.next
+    fastNode = fastNode.next.next
+  }
+
+  fmt.Println(slowNode.value)
+  return slowNode
+}
+
 func main() {
   // Shruti: Instead of manually curating the list, try using the functions you authored e.g. InsertNode. It will help you test them thoroughly as well.
-  fifthNode := Node{value: 5, next: nil}
-  fourthNode := Node{value:4, next: &fifthNode}
-  thirdNode := Node{value:3, next: &fourthNode}
-  secondNode := Node{value:2, next:&thirdNode}
-  firstNode := Node{value:1, next: &secondNode}
-  myList := LinkedList{head:&firstNode, size:5}
+  // fifthNode := Node{value: 5, next: nil}
+  // fourthNode := Node{value:4, next: &fifthNode}
+  // thirdNode := Node{value:3, next: &fourthNode}
+  // secondNode := Node{value:2, next:&thirdNode}
+  // firstNode := Node{value:1, next: &secondNode}
+  myList := LinkedList{head:nil, size:0}
+
+  myList.InsertNode(1)
+  myList.InsertNode(2)
+  myList.InsertNode(3)
 
   myList.FindLength()
 

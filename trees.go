@@ -89,12 +89,19 @@ func (tree *Tree) IterativeInorder(node *Node) {
 
 // Breadth first traversal
 func (tree *Tree) BreadthFirst(node *Node) {
-	currentNode := tree.root
-	finalqQueue := []int
+	if node == nil {
+		return
+	}
+	
+	finalQueue := []int
 
-	finalQueue = append(finalQueue, currentNode)
+	finalQueue = append(finalQueue, node)
 
 	for len(finalQueue) > 0 {
+		currentNode := finalQueue[0]
+		finalQueue = finalQueue[1:]
+		fmt.Println(currentNode)
+
 		if currentNode.left != nil {
 			finalQueue = append(finalQueue, currentNode.left)
 		}
@@ -103,6 +110,11 @@ func (tree *Tree) BreadthFirst(node *Node) {
 			finalQueue = append(finalQueue, currentNode.right)
 		}
 	}	
+}
+
+func (tree *Tree) LevelOrder(node *Node) {
+
+}
 
 // Find the height of a tree (recursion)
 func (tree *Tree) FindHeight(node *Node) int {
@@ -173,4 +185,7 @@ func (tree *Tree) RemoveNode(node *Node, value int) bool {
 		}
 	}
 	
+}
+
+func main() {
 }
